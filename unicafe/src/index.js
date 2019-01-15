@@ -12,21 +12,24 @@ const Button = ({clickHandler, name}) => {
 
 const Statistics = ({ratings}) => {
     const [good, neutral, bad] = ratings; 
-    if(ratings.reduce((acc, e) => acc + e, 0) == 0)
+    if(ratings.reduce((acc, e) => acc + e, 0) === 0)
         return <p>Ei yhtään palautetta annettu</p>
 
-    return(<>
+    return(<table>
+    <thead></thead>
+    <tbody>
     <Statistic name='good' value={good} />
     <Statistic name='neutral' value={neutral} />
     <Statistic name='bad' value={bad} />  
     <Summary counts={[good, neutral, bad]} />
-    </>)
+    </tbody>
+    </table>)
 }
 
 const Header = ({text}) => <h1>{text}</h1>
 
 const Statistic = ({name, value, afterText}) => {
-    return <p>{name} {value}{afterText ? afterText : ''}</p>
+    return <tr><td>{name}</td><td>{value}{afterText ? afterText : ''}</td></tr>
 
 }
 
