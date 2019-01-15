@@ -10,6 +10,16 @@ const Button = ({clickHandler, name}) => {
     )
 }
 
+const Statistics = ({ratings}) => {
+    const [good, neutral, bad] = ratings; 
+    return(<>
+    <Statistic name='good' count={good} />
+    <Statistic name='neutral' count={neutral} />
+    <Statistic name='bad' count={bad} />  
+    <Summary counts={[good, neutral, bad]} />
+    </>)
+}
+
 const Header = ({text}) => <h1>{text}</h1>
 
 const Statistic = ({name, count}) => {
@@ -50,10 +60,7 @@ const App = () => {
         </div>
         <div>
             <Header text='statistiikka' />
-            <Statistic name='good' count={good} />
-            <Statistic name='neutral' count={neutral} />
-            <Statistic name='bad' count={bad} />  
-            <Summary counts={[good, neutral, bad]} />
+            <Statistics ratings={[good, neutral, bad]} />
         </div>
 
         </div>
