@@ -14,19 +14,19 @@ const Statistics = ({ratings}) => {
     const [good, neutral, bad] = ratings; 
     if(ratings.reduce((acc, e) => acc + e, 0) == 0)
         return <p>Ei yhtään palautetta annettu</p>
-        
+
     return(<>
-    <Statistic name='good' count={good} />
-    <Statistic name='neutral' count={neutral} />
-    <Statistic name='bad' count={bad} />  
+    <Statistic name='good' value={good} />
+    <Statistic name='neutral' value={neutral} />
+    <Statistic name='bad' value={bad} />  
     <Summary counts={[good, neutral, bad]} />
     </>)
 }
 
 const Header = ({text}) => <h1>{text}</h1>
 
-const Statistic = ({name, count}) => {
-    return <p>{name} {count}</p>
+const Statistic = ({name, value, afterText}) => {
+    return <p>{name} {value}{afterText ? afterText : ''}</p>
 
 }
 
@@ -37,11 +37,9 @@ const Summary = ({counts}) => {
     let posRatio = (total_count > 0) ? counts[0] / total_count : 0;
 
     return <>
-    <p>
-        yhteensä {total_count}
-    </p>
-    <p>keskiarvo {mean}</p>
-    <p>positiivisia {100*posRatio} %</p>
+        <Statistic name='yhteensä' value={total_count} />
+        <Statistic name='keskiarvo' value={mean} />
+        <Statistic name='positiivisia' value={100 * posRatio}  afterText=' %'/>
     </>
 
 }
