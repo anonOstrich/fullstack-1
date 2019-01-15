@@ -12,6 +12,9 @@ const Button = ({clickHandler, name}) => {
 
 const Statistics = ({ratings}) => {
     const [good, neutral, bad] = ratings; 
+    if(ratings.reduce((acc, e) => acc + e, 0) == 0)
+        return <p>Ei yhtään palautetta annettu</p>
+        
     return(<>
     <Statistic name='good' count={good} />
     <Statistic name='neutral' count={neutral} />
