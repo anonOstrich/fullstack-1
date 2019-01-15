@@ -11,6 +11,24 @@ const anecdotes = [
   ]
 
 
+const Title = ({text}) => <h1>{text}</h1>
+
+const Popular = () => {
+    let popIdx = 0; 
+    let mostVotes = 0; 
+    for(let i = 0; i < scores.length; i++){
+        if(scores[i] > mostVotes){
+            popIdx = i; 
+            mostVotes = scores[i]; 
+        }
+    }
+
+    return( 
+    <p>
+        {anecdotes[popIdx]} 
+    </p>)
+}
+
 const Button = ({clickEvent, text, id}) => <button id={id || ''} onClick={clickEvent}>{text}</button>
 
 const Statistic = ({voteCount}) => <p>has {voteCount} votes</p>
@@ -32,10 +50,13 @@ const App = ({anectodes}) => {
 
   return (
     <div>
+     <Title text='Anecdote of the day' />
      <p>{anecdotes[selected]}</p>
       <Statistic voteCount={scores[selected]}/>
       <Button clickEvent={() => voteAnecdote(selected)} text='Vote' id='votes' />
       <Button clickEvent={displayRandom} text='Next anecdote' />
+      <Title text='Anecdote with most likes' />
+      <Popular />
     </div>
   )
 }
