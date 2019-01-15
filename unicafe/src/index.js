@@ -17,6 +17,22 @@ const Statistic = ({name, count}) => {
 
 }
 
+const Summary = ({counts}) => {
+    let total_count = counts.reduce((acc, elem) => acc + elem, 0)
+    let sum = counts[0] - counts[2];
+    let mean = (total_count > 0) ? sum / total_count : 0; 
+    let posRatio = (total_count > 0) ? counts[0] / total_count : 0;
+
+    return <>
+    <p>
+        yhteensä {total_count}
+    </p>
+    <p>keskiarvo {mean}</p>
+    <p>positiivisia {100*posRatio} %</p>
+    </>
+
+}
+
 const App = () => {
     const [good, setGood] = useState(0); 
     const [neutral, setNeutral] = useState(0); 
@@ -36,7 +52,8 @@ const App = () => {
             <Header text='statistiikka' />
             <Statistic name='good' count={good} />
             <Statistic name='neutral' count={neutral} />
-            <Statistic name='bad' count={bad} />   
+            <Statistic name='bad' count={bad} />  
+            <Summary counts={[good, neutral, bad]} />
         </div>
 
         </div>
